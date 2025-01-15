@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rute Pengiriman</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+  <header>
+    <h1 class="header-title">Sistem Optimasi Rute Pendistribusian Cabai</h1>
+    <p class="header-subtitle">Menggunakan Algoritma Ant Colony Optimization</p>
+  </header>
+
+  <div class="main-content">
+    <div class="sidebar">
+      <div class="menu-selector">
+        <button class="menu-button active" data-menu="all-routes">Semua Rute</button>
+        <button class="menu-button" data-menu="specific-route">Rute Spesifik</button>
+      </div>
+
+      <div class="route-selection active" id="all-routes-form">
+        <div class="form-group">
+          <label for="vehicle-type">Jenis Kendaraan:</label>
+          <select id="vehicle-type">
+            <option value="truck">Truck</option>
+            <option value="pickup">Pickup</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="capacity">Kapasitas Muatan (kg):</label>
+          <input type="number" id="capacity" min="0" value="1000">
+        </div>
+
+        <div class="form-group">
+          <label for="start-time">Waktu Mulai:</label>
+          <input type="time" id="start-time" value="08:00">
+        </div>
+
+        <div class="form-group">
+          <label for="max-time">Batas Waktu Pengiriman (jam):</label>
+          <input type="number" id="max-time" min="1" max="24" value="8">
+        </div>
+      </div>
+
+      <div class="route-selection" id="specific-route-form">
+        <div class="form-group">
+          <label for="start-location">Lokasi Awal:</label>
+          <select id="start-location"></select>
+        </div>
+        <div class="form-group">
+          <label for="end-location">Lokasi Tujuan:</label>
+          <select id="end-location"></select>
+        </div>
+      </div>
+
+      <button id="optimize-btn">Optimasi Rute</button>
+
+      <div class="results">
+        <h3>Hasil Optimasi:</h3>
+        <div id="vehicle-details" class="vehicle-info">
+          <span class="vehicle-icon">🚛</span>
+          <div>
+            <strong>Kendaraan:</strong> <span id="selected-vehicle">Truck Box</span><br>
+            <strong>Kapasitas:</strong> <span id="selected-capacity">1000 kg</span>
+          </div>
+        </div>
+
+        <div class="route-stats">
+          <div class="stat-card">
+            <div>Total Jarak</div>
+            <div class="stat-value" id="total-distance">0 km</div>
+          </div>
+          <div class="stat-card">
+            <div>Estimasi Waktu</div>
+            <div class="stat-value" id="total-time">0 jam</div>
+          </div>
+          <div class="stat-card">
+            <div>Total Pengiriman</div>
+            <div class="stat-value" id="total-deliveries">0</div>
+          </div>
+        </div>
+
+        <h3>Urutan Rute:</h3>
+        <p id="best-route">-</p>
+      </div>
+    </div>
+
+    <div id="map"></div>
+  </div>
+  <script src="index.js"></script>
+ 
+</body>
+</html>
